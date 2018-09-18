@@ -14,4 +14,9 @@ public class HelloWorldController {
 		return "Hello World";
 	}
 	
+	@RequestMapping(method=RequestMethod.GET, path="/hello-bean")
+	public HelloWorldBean helloWorldBean() {
+		return new HelloWorldBean("Hello World Bean");
+	}
+
 }
