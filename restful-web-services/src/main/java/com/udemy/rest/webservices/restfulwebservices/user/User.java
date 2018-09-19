@@ -6,13 +6,19 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import javax.xml.crypto.Data;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(description="User Details")
 public class User {
 	private Integer id;
 	
 	@Size(min=2, message="Name should have at least two characters")
+	@ApiModelProperty(notes="Name should have at least two characters")
 	private String name;
 	
 	@Past
+	@ApiModelProperty(notes="Birth date should be in past")
 	private Date dateOfBirth;
 
 	public User(Integer id, String name, Date dateOfBirth) {
