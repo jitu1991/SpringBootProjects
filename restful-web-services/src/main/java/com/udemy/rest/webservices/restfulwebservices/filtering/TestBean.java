@@ -1,13 +1,15 @@
 package com.udemy.rest.webservices.restfulwebservices.filtering;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 //@JsonIgnoreProperties(value= {"field1","field2"})
+@JsonFilter("TestBeanFilter")
 public class TestBean {
 	private String field1;
 	private String field2;
-	@JsonIgnore
+	//@JsonIgnore
 	private String field3;
 
 	public TestBean(String field1, String field2, String field3) {
