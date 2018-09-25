@@ -3,6 +3,7 @@ package com.udemy.rest.webservices.restfulwebservices.user;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 import java.net.URI;
 import java.nio.file.attribute.UserPrincipalNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +26,9 @@ public class UserJPAResource {
 
 	@Autowired
 	private UserRepository userRepository;
-
+	@Autowired
+	private PostRepository postRepository;
+	
 	@GetMapping(path = "/jpa/users")
 	public List<User> retrieveAllUsers() {
 		return userRepository.findAll();
@@ -60,5 +63,29 @@ public class UserJPAResource {
 	@DeleteMapping(path = "/jpa/users/{id}")
 	public void deleteUserById(@PathVariable int id) {
 		userRepository.deleteById(id);
+	}
+	
+	@GetMapping(path = "/jpa/users/{id}/posts")
+	public List<Post> retrieveAllPosts(@PathVariable Integer id) {
+		Optional<User> userOptional = userRepository.findById(id);
+		if(!userOptional.isPresent())
+			throw new UserNotFoundException("id: " + id);
+		
+		return userOptional.get().getPosts();
+	}
+	
+	@PostMapping(path = "/jpa/users/{id}/posts")
+	public ResponseEntity<Object> createPost(@PathVariable int id, @RequestBody Post post) {
+		Optional<User> userOptional = userRepository.findById(id);
+		if(!userOptional.isPresent())
+			throw new UserNotFoundException("id: " + id);
+		
+		User user = userOptional.get();
+		post.setUser(user);
+		postRepository.save(post);
+		
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(post.getId())
+				.toUri();
+		return ResponseEntity.created(location).build();
 	}
 }

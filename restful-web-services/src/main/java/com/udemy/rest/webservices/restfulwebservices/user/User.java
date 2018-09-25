@@ -1,10 +1,12 @@
 package com.udemy.rest.webservices.restfulwebservices.user;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import javax.xml.crypto.Data;
@@ -26,6 +28,9 @@ public class User {
 	@Past
 	@ApiModelProperty(notes="Birth date should be in past")
 	private Date dateOfBirth;
+	
+	@OneToMany(mappedBy="user")
+	private List<Post> posts;
 
 	public User( ) {
 	}
@@ -54,7 +59,15 @@ public class User {
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
-	
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+
 	@Override
 	public String toString() {
 		return String.format("User [id=%s, name=%s, dateOfBirth=%s]", id, name, dateOfBirth);
