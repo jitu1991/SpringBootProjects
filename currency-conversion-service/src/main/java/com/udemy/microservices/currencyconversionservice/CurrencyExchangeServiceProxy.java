@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface CurrencyExchangeServiceProxy {
 	
 	//@GetMapping("/currency-exchange/from/{from}/to/{to}")
+	//For using zuul api gateway to microservice - add service name to url start
 	@GetMapping("/currency-exchange-service/currency-exchange/from/{from}/to/{to}")
 	public CurrencyConversionBean retrieveExchangeValue(@PathVariable String from, @PathVariable String to);
 }
