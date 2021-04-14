@@ -22,7 +22,6 @@ public class FlightBookingService {
 	@Autowired
 	private PaymentInfoRepository paymentInfoRepository;
 	
-	
 	public FlightBookingAcknowledgement bookFlightTicket(FlightBookingRequest request) {
 		PassengerInfo passengerInfo = request.getPassengerInfo();
 		passengerInfo = passengerInfoRespository.save(passengerInfo);
