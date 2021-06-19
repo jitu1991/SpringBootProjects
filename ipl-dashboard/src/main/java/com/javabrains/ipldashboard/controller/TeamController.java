@@ -29,10 +29,10 @@ public class TeamController {
 		this.matchRepository = matchRepository;
 	}
 	
-	@GetMapping("/teams")
-	public List<Team> getTeams() {
-		return this.teamRepository.findAll();
-	}
+	/*
+	 * @GetMapping("/teams") public List<Team> getTeams() { return
+	 * this.teamRepository.findAll(); }
+	 */
 
 	@GetMapping("/team/{teamName}")
 	public Team getTeam(@PathVariable String teamName) {
@@ -58,5 +58,10 @@ public class TeamController {
 				teamName, startDate, endDate);*/
 		
 		return this.matchRepository.getMatchesByTeamBetweenDates(teamName, startDate, endDate);
+	}
+	
+	@GetMapping("/teams")
+	public List<Team> getAllTeams() {
+		return this.teamRepository.findAll();
 	}
 }
