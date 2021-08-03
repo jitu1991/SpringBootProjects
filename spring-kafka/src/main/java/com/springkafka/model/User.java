@@ -2,29 +2,40 @@ package com.springkafka.model;
 
 public class User {
 	private String name;
-	private double salary;
+	private String dept;
 
-	public User(String name, double salary) {
-		super();
-		this.name = name;
-		this.salary = salary;
+	
+	public User() {
 	}
+
+
+	public User(String name, String dept) {
+		this.name = name;
+		this.dept = dept;
+	}
+
 
 	public String getName() {
 		return name;
 	}
 
+
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public double getSalary() {
-		return salary;
+
+	public String getDept() {
+		return dept;
 	}
 
-	public void setSalary(double salary) {
-		this.salary = salary;
+
+	public void setDept(String dept) {
+		this.dept = dept;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "User [name=" + name + ", dept=" + dept + "]";
+	}
 }

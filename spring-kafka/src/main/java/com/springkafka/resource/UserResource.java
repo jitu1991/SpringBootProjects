@@ -22,7 +22,7 @@ public class UserResource {
 	public String getMessage(@PathVariable("name") final String name) {
 		//kafkaTemplate.send(TOPIC, message);
 		
-		kafkaTemplate.send(TOPIC, new User(name, 344.5));
+		kafkaTemplate.send(TOPIC, new User(name, "acc"));
 		return "Published Successfully";
 	}
 }
